@@ -104,7 +104,7 @@ export async function connectMongoClientDataService({
   productDocsLink,
   reauthenticationHandler,
 }: {
-  connectionOptions: ConnectionOptions;
+  connectionOptions: Readonly<ConnectionOptions>;
   setupListeners: (client: MongoClient) => void;
   signal?: AbortSignal;
   logger?: UnboundDataServiceImplLogger;
@@ -120,8 +120,6 @@ export async function connectMongoClientDataService({
     options: { url: string; options: DevtoolsConnectOptions }
   ]
 > {
-  connectionOptions.connectionString = process.env.CONNECTION_STR;
-  console.log(connectionOptions.connectionString);
   debug(
     'connectMongoClient invoked',
     redactConnectionOptions(connectionOptions)
