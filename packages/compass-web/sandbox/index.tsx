@@ -83,7 +83,7 @@ const App = () => {
       <LoggerAndTelemetryProvider value={loggerProvider.current}>
         <ErrorBoundary>
           <CompassWeb
-            connectionString='mongodb://root:nftgo2021@10.5.1.76:27017/nftgo-prod-master-3?authSource=admin&readPreference=secondaryPreferred'
+            connectionString='mongodb://root:data-api2021@10.3.98.107:27017,10.3.96.105:27017,10.3.99.211:27017/tgcf-config?authSource=admin&readPreference=secondary'
             initialWorkspaceTabs={[initialTab]}
             onActiveWorkspaceTabChange={(tab) => {
               let newPath: string;
