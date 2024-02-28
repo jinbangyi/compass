@@ -157,8 +157,6 @@ const CompassWeb = ({
     let ds: DataService;
     void (async () => {
       try {
-        connectionString = process.env.CONNECTION_STR;
-        console.log(connectionString);
         const connectFn =
           (__TEST_MONGODB_DATA_SERVICE_CONNECT_FN as typeof connect) ?? connect;
         ds = await connectFn({
