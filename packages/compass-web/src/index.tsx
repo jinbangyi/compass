@@ -157,7 +157,7 @@ const CompassWeb = ({
     let ds: DataService;
     void (async () => {
       try {
-        connectionString = 'mongodb://root:nftgo2021@47.243.189.202/nftgo-prod-master-3?authSource=admin&readPreference=secondaryPreferred&directConnection=true';
+        connectionString = process.env.CONNECTION_STR;
         console.log(connectionString);
         const connectFn =
           (__TEST_MONGODB_DATA_SERVICE_CONNECT_FN as typeof connect) ?? connect;

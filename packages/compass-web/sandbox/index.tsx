@@ -83,6 +83,7 @@ const App = () => {
       <LoggerAndTelemetryProvider value={loggerProvider.current}>
         <ErrorBoundary>
           <CompassWeb
+            connectionString='please contract the maintainer'
             initialWorkspaceTabs={[initialTab]}
             onActiveWorkspaceTabChange={(tab) => {
               let newPath: string;
