@@ -9,6 +9,7 @@ import {
 
 import createDebug from 'debug';
 import { CompassWeb } from '../src/index';
+import { mongodbConnectionString } from './vars';
 import type { OpenWorkspaceOptions } from '@mongodb-js/compass-workspaces';
 
 import { LoggerAndTelemetryProvider } from '@mongodb-js/compass-logging/provider';
@@ -83,7 +84,7 @@ const App = () => {
       <LoggerAndTelemetryProvider value={loggerProvider.current}>
         <ErrorBoundary>
           <CompassWeb
-            connectionString='mongodb://root:data-api2021@10.3.98.107:27017,10.3.96.105:27017,10.3.99.211:27017/tgcf-config?authSource=admin&readPreference=secondary'
+            connectionString={mongodbConnectionString}
             initialWorkspaceTabs={[initialTab]}
             onActiveWorkspaceTabChange={(tab) => {
               let newPath: string;
@@ -112,3 +113,5 @@ const App = () => {
 };
 
 ReactDOM.render(<App></App>, document.querySelector('#sandbox-app'));
+
+

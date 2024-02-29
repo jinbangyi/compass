@@ -1,17 +1,12 @@
 import { ipVersion } from 'is-ip';
 import { Duplex } from 'stream';
+import { proxy } from './vars';
 
 export const isIP = (input: string) => ipVersion(input) ?? 0;
 
 export { isIPv4, isIPv6 } from 'is-ip';
 
 let warn = false;
-
-const proxy = {
-  secure: process.env.WEBSOCKET_SECURE,
-  host: process.env.WEBSOCKET_HOST,
-  port: process.env.WEBSOCKET_PORT,
-};
 
 export const setProxy = (
   options: { host?: string; port?: number; secure?: boolean } = {}
