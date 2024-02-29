@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY . .
 
-ENV WEBSOCKET_SECURE=false
-ENV WEBSOCKET_HOST=localhost
-ENV WEBSOCKET_PORT=1338
-ENV MONGODB_CONN_STR
+ARG WEBSOCKET_SECURE=false
+ARG WEBSOCKET_HOST=localhost
+ARG WEBSOCKET_PORT=1338
+ARG MONGODB_CONN_STR
 
 RUN apt update && \
 apt install curl -y && \
@@ -27,4 +27,12 @@ echo '
 const mongodbConnectionString="${MONGODB_CONN_STR}";
 export { mongodbConnectionString };' > /app/packages/compass-web/sandbox/vars.tsx
 
+# build browser
+RUN npm run build --workspace=@gribnoysup/mongodb-browser 
+
 CMD [ "/root/.nvm/versions/node/v16.20.2/bin/npm" "run" "start-web"]
+
+# TODO
+# build web
+
+# docker build -t temp --build-arg WEBSOCKET_HOST=18.140.196.119 .
