@@ -134,6 +134,7 @@ class Socks5HttpAgent extends HttpAgent {
   }
 
   createConnection(options, callback) {
+    console.log(options);
     void SocksClient.createConnection(
       {
         destination: {

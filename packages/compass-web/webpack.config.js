@@ -7,6 +7,8 @@ const {
 } = require('@mongodb-js/webpack-config-compass');
 const { createWebSocketProxy } = require('@gribnoysup/mongodb-browser/proxy');
 
+const websocketPort = process.env.WEBSOCKET_PORT ?? 1337;
+
 function localPolyfill(name) {
   return path.resolve(__dirname, 'polyfills', ...name.split('/'), 'index.ts');
 }
@@ -88,7 +90,8 @@ module.exports = async (env, args) => {
 
   if (serve) {
     // TODO: logs are pretty rough here, should make it better
-    createWebSocketProxy();
+    createWebSocketProxy(websocketPort);
+    console.log(`create websocket server ${websocketPort}`);
 
     config.output = {
       path: config.output.path,
