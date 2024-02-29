@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM node:16.20.2
 
 WORKDIR /app
 
@@ -7,17 +7,17 @@ ARG WEBSOCKET_HOST=localhost
 ARG WEBSOCKET_PORT=1338
 ARG MONGODB_CONN_STR
 
-RUN apt update && \
-apt install curl python3 python3-pip -y && \
-ln -s /usr/bin/python3 /usr/bin/python && \
-# install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
-export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-nvm install 16.20.2
+# RUN apt update && \
+# apt install curl python3 python3-pip -y && \
+# ln -s /usr/bin/python3 /usr/bin/python && \
+# # install nvm
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
+# export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+# nvm install 16.20.2
 
 COPY . .
 
-# add config
+# add default config
 RUN echo "export const proxy = { \
   secure: ${WEBSOCKET_SECURE}, \
   host: '${WEBSOCKET_HOST}', \
@@ -27,12 +27,10 @@ echo "const mongodbConnectionString='${MONGODB_CONN_STR}'; \
 export { mongodbConnectionString };" > /app/packages/compass-web/sandbox/vars.tsx
 
 # build browser
-RUN export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-nvm use 16.20.2 && \
-npm install && \
+RUN npm install && \
 npm run build --workspace=@gribnoysup/mongodb-browser 
 
-CMD [ "/bin/bash" "-c" 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && npm run start-web']
+CMD [ "/bin/bash" "-c" 'npm run start-web']
 
 # TODO
 # build web
