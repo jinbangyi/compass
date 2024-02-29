@@ -12,9 +12,7 @@ ARG MONGODB_CONN_STR
 RUN apt update && \
 apt install curl -y && \
 # install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
-nvm install 16.20.2 && nvm use 16.20.2 && \
-npm install
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # add config
 RUN echo ' \
@@ -28,7 +26,10 @@ const mongodbConnectionString="${MONGODB_CONN_STR}"; \
 export { mongodbConnectionString };' > /app/packages/compass-web/sandbox/vars.tsx
 
 # build browser
-RUN npm run build --workspace=@gribnoysup/mongodb-browser 
+RUN  export NVM_DIR="$HOME/.nvm" && \
+nvm install 16.20.2 && nvm use 16.20.2 && \
+npm install && \
+npm run build --workspace=@gribnoysup/mongodb-browser 
 
 CMD [ "/root/.nvm/versions/node/v16.20.2/bin/npm" "run" "start-web"]
 
