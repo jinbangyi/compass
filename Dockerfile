@@ -32,7 +32,7 @@ nvm use 16.20.2 && \
 npm install && \
 npm run build --workspace=@gribnoysup/mongodb-browser 
 
-CMD [ "/bin/bash" "-c" 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && npm start-web']
+CMD [ "/bin/bash" "-c" 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && npm run start-web']
 
 # TODO
 # build web
