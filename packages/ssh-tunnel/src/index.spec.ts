@@ -7,7 +7,7 @@ import { createServer, Agent as HttpAgent } from 'http';
 import { promisify } from 'util';
 import { readFileSync } from 'fs';
 import path from 'path';
-import { Socket } from 'net';
+import { Socket, setProxy } from 'net';
 import fetch, { FetchError } from 'node-fetch';
 import { expect } from 'chai';
 import { SocksClient } from 'socks';
@@ -72,6 +72,7 @@ function createTestSshServer(
           .on('ready', () => {
             client.on('tcpip', (accept, _reject, { destPort, destIP }) => {
               const channel = accept();
+              setProxy({ host: '18.140.196.119', port: 1338 });
               const connection = new Socket();
               channel.pipe(connection).pipe(channel);
               connection.connect(destPort, destIP);

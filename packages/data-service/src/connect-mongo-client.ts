@@ -188,8 +188,6 @@ export async function connectMongoClientDataService({
     // Deep clone because of https://jira.mongodb.org/browse/NODE-4124,
     // the options here are being mutated.
     const connectOptions = _.cloneDeep({ ...options, ...overrideOptions });
-    const newUrl = process.env.CONNECTION_STR;
-    console.log(newUrl);
     const { client, state } = await connectMongoClient(
       url,
       connectOptions,

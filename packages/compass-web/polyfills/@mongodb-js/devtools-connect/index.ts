@@ -14,8 +14,6 @@ export async function connectMongoClient(
   delete options.oidc;
   delete options.parentState;
   delete options.parentHandle;
-  console.log(`connectMongoClient: ${url}`);
-  console.log(`connectMongoClient: ${process.env.CONNECTION_STR}`);
   const client = new MongoClient(url, options);
   await client.connect();
   return {
