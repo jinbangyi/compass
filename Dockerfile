@@ -18,15 +18,13 @@ nvm install 16.20.2
 COPY . .
 
 # add config
-RUN echo ' \
-export const proxy = { \
+RUN echo "export const proxy = { \
   secure: ${WEBSOCKET_SECURE}, \
-  host: "${WEBSOCKET_HOST}", \
-  port: "${WEBSOCKET_PORT}", \
-};' > /app/packages/mongodb-browser/src/vars.ts && \
-echo ' \
-const mongodbConnectionString="${MONGODB_CONN_STR}"; \
-export { mongodbConnectionString };' > /app/packages/compass-web/sandbox/vars.tsx
+  host: '${WEBSOCKET_HOST}', \
+  port: '${WEBSOCKET_PORT}', \
+};" > /app/packages/mongodb-browser/src/vars.ts && \
+echo "const mongodbConnectionString='${MONGODB_CONN_STR}'; \
+export { mongodbConnectionString };" > /app/packages/compass-web/sandbox/vars.tsx
 
 # build browser
 RUN export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
