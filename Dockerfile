@@ -2,8 +2,6 @@ FROM ubuntu:22.04
 
 WORKDIR /app
 
-COPY . .
-
 ARG WEBSOCKET_SECURE=false
 ARG WEBSOCKET_HOST=localhost
 ARG WEBSOCKET_PORT=1338
@@ -13,6 +11,8 @@ RUN apt update && \
 apt install curl -y && \
 # install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+COPY . .
 
 # add config
 RUN echo ' \
@@ -26,10 +26,9 @@ const mongodbConnectionString="${MONGODB_CONN_STR}"; \
 export { mongodbConnectionString };' > /app/packages/compass-web/sandbox/vars.tsx
 
 # build browser
-RUN  export NVM_DIR="$HOME/.nvm" && \
-nvm install 16.20.2 && nvm use 16.20.2 && \
-npm install && \
-npm run build --workspace=@gribnoysup/mongodb-browser 
+RUN /root/.nvm/nvm.sh install 16.20.2 && /root/.nvm/nvm.sh use 16.20.2 && \
+/root/.nvm/versions/node/v16.20.2/bin/npm install && \
+/root/.nvm/versions/node/v16.20.2/bin/npm run build --workspace=@gribnoysup/mongodb-browser 
 
 CMD [ "/root/.nvm/versions/node/v16.20.2/bin/npm" "run" "start-web"]
 
