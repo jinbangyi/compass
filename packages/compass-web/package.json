@@ -37,7 +37,7 @@
     "compile": "npm run webpack -- --mode production",
     "webpack": "webpack-compass",
     "postcompile": "tsc -p tsconfig-build.json --emitDeclarationOnly",
-    "start": "WEBSOCKET_SECURE=false WEBSOCKET_HOST=18.140.196.119 WEBSOCKET_PORT=1338 npm run webpack serve -- --mode development",
+    "start": "npm run webpack serve -- --mode development",
     "analyze": "npm run webpack -- --mode production --analyze",
     "typecheck": "tsc -p tsconfig-lint.json --noEmit",
     "eslint": "eslint",
