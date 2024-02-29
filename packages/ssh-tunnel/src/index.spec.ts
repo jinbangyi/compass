@@ -72,7 +72,8 @@ function createTestSshServer(
           .on('ready', () => {
             client.on('tcpip', (accept, _reject, { destPort, destIP }) => {
               const channel = accept();
-              setProxy({ host: '18.140.196.119', port: 1338 });
+              // setProxy({ host: '18.140.196.119', port: 1338 });
+              console.log(`SSHServer: ${destPort} ${destIP}`);
               const connection = new Socket();
               channel.pipe(connection).pipe(channel);
               connection.connect(destPort, destIP);
@@ -135,7 +136,8 @@ class Socks5HttpAgent extends HttpAgent {
   }
 
   createConnection(options, callback) {
-    console.log(options);
+    console.log(`createConnection: ${options}`);
+    console.log(`createConnection: ${this.options}`);
     void SocksClient.createConnection(
       {
         destination: {

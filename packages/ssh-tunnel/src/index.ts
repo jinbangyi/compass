@@ -72,7 +72,11 @@ export class SshTunnel extends EventEmitter {
   constructor(config: Partial<SshTunnelConfig> = {}) {
     super();
 
+    console.log(config);
+
     this.rawConfig = getSshTunnelConfig(config);
+
+    console.log(this.rawConfig);
 
     this.sshClient = new SshClient();
 
