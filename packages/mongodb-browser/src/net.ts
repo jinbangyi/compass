@@ -8,9 +8,9 @@ export { isIPv4, isIPv6 } from 'is-ip';
 let warn = false;
 
 const proxy = {
-  secure: false,
-  host: 'localhost',
-  port: 1338
+  secure: process.env.WEBSOCKET_SECURE,
+  host: process.env.WEBSOCKET_HOST,
+  port: process.env.WEBSOCKET_PORT,
 };
 
 export const setProxy = (
