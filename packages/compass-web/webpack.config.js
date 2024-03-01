@@ -114,6 +114,8 @@ module.exports = async (env, args) => {
         client: {
           overlay: { warnings: false, errors: true, runtimeErrors: true },
         },
+        allowedHosts: "all",
+        port: 443,
       },
       resolve: {
         alias: {
